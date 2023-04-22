@@ -1,0 +1,49 @@
+.number {
+    color: #FFE600;
+}
+
+.indicator-green {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #5EDB4A;
+}
+
+.indicator-yellow {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #FFF067;
+}
+
+.indicator-red {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #FF6767;
+}
+
+.stage-title {
+    font-weight: 500;
+}
+
+
+
+
+.report-block {
+
+    padding: 20px;
+}
+
+.report-block .title{
+    font-weight: 500;
+}
+
+.report-block .body {
+    padding: 20px 0;
+}
+
+
+.report-block .sent-report {
+
+}

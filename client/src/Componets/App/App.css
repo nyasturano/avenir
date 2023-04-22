@@ -1,0 +1,54 @@
+button {
+    background-color: transparent;
+    border: none;
+}
+
+.btn-yellow {
+    background-color: #FFF067;
+    border: none;
+    color: black;
+    margin: 0;
+    padding: 12px;
+}
+
+.btn-yellow-inverse {
+    background-color: #ffffff;
+    border: 1px solid #FFE500;
+    color: black;
+    margin: 0;
+    padding: 12px;
+}
+
+.btn-yellow-inverse:hover {
+    border: 1px solid #faec68;
+    background-color: rgb(247, 247, 247);
+    color: black;
+}
+
+.btn-yellow:hover {
+    background-color: rgb(255, 247, 174);
+    border: none;
+    color: black;
+}
+
+.nav {
+    height: 75px;
+    background-color: #434651;
+    border-radius: 4px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding-left: 10px;
+    padding-right: 40px;
+    text-align: center;
+    transition-duration: .3s;
+}
+
+.nav a:hover {
+    transition-duration: .3s;
+    color: #FFE500;
+}
+
+
