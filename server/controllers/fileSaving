@@ -1,10 +1,3 @@
-const ApiError = require('../error/ApiError')
-const {Customer} = require('../models/models')
-
-const uuid = require('uuid')
-const path = require('path')
-
-class customerController {
     async create(req, res) {
         try {
             const {img} = req.files
@@ -16,6 +9,3 @@ class customerController {
             next(ApiError.badRequest(e.message))
         }
     }
-}
-
-module.exports = new customerController();
