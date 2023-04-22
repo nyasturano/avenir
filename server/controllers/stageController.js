@@ -6,11 +6,11 @@ class stageController {
 
   async create(req, res, next) {
     try {
-      const {name, projectId, statusId} = req.body
+      const {name, projectId, stageDescId, statusId} = req.body
       if (!name) {
         return next(ApiError.badRequest('Укажите название'))
       }
-      const emp = await Stage.create({name, projectId, statusId})
+      const emp = await Stage.create({name, projectId, stageDescId, statusId})
       return res.json({token:emp.id })
     } catch (error){
       return res.send(error.message)

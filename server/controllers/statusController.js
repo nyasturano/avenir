@@ -6,11 +6,11 @@ class statusController {
 
   async create(req, res, next) {
     try {
-      const {name} = req.body
-      if (!name) {
+      const {status} = req.body
+      if (!status) {
         return next(ApiError.badRequest('Укажите название'))
       }
-      const emp = await Status.create({name})
+      const emp = await Status.create({status})
       return res.json({token:emp.id })
     } catch (error){
       return res.send(error.message)
