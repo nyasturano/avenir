@@ -9,7 +9,7 @@ const stageRouter = require('./stageRouter')
 const statusRouter = require('./statusRouter')
 const reportRouter = require('./reportRouter')
 const templateRouter = require('./templateRouter')
-const templateStageRouter = require('./templateStageRouter')
+const templateStageDescRouter = require('./templateStageDescRouter')
 const stageDescRouter = require('./stageDescRouter')
 const stageDescDocumentRouter = require('./stageDescDocumentRouter')
 const documentRouter = require('./documentRouter')
@@ -23,7 +23,7 @@ router.use('/stage', stageRouter);
 router.use('/status', statusRouter);
 router.use('/report', reportRouter);
 router.use('/template', templateRouter);
-router.use('/templateStage', templateStageRouter);
+router.use('/templateStageDesc', templateStageDescRouter);
 router.use('/stageDesc', stageDescRouter);
 router.use('/stageDescDocument', stageDescDocumentRouter);
 router.use('/document', documentRouter);
