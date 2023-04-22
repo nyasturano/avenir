@@ -61,7 +61,7 @@ const Document = sequelize.define('document', {
 StageDesc.belongsToMany(Document, {through: StageDescDocument})
 Document.belongsToMany(StageDesc, {through: StageDescDocument})
 
-const TemplateStage = sequelize.define('template_stage', {
+const TemplateStageDesc = sequelize.define('template_stage_desc', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   });
 const Template = sequelize.define('template', {
@@ -70,8 +70,8 @@ const Template = sequelize.define('template', {
     description: {type: DataTypes.STRING},
   });
 
-StageDesc.belongsToMany(Template, {through: TemplateStage})
-Template.belongsToMany(StageDesc, {through: TemplateStage})
+StageDesc.belongsToMany(Template, {through: TemplateStageDesc})
+Template.belongsToMany(StageDesc, {through: TemplateStageDesc})
 
 const Report = sequelize.define('report', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -99,7 +99,7 @@ Status.hasOne(Stage)
     Status,
     Report,
     Template,
-    TemplateStage,
+    TemplateStageDesc,
     Document,
     Project
   }
