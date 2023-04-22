@@ -27,7 +27,7 @@ class stageDescDocumentController {
       return res.status(500).send(error.message);
   }
   }
-
+  
   async getOne(req, res) {
     try {
         const stageDescDocument = await StageDescDocument.findOne({where: {id:req.params.id}})

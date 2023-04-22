@@ -6,6 +6,7 @@ const router = new Router()
 router.post('/create', stageController.create)
 router.delete('/', stageController.delete)
 router.get('/', stageController.getAll)
+router.get('/documents/:id', stageController.getDocuments)
 router.get('/:id', stageController.getOne)
 
 module.exports = router;

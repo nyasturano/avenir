@@ -1,5 +1,5 @@
 import './header.css';
-import { useNavigate } from "react-router-dom";
+    import { useNavigate } from "react-router-dom";
 
 import back from '../../Icons/back.png';
 export const Header = ({title}) => {

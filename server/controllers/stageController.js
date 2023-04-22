@@ -1,5 +1,5 @@
 const ApiError = require('../error/ApiError')
-const {Stage} = require('../models/models')
+const {Stage, StageDescDocument, StageDesc} = require('../models/models')
 
 
 class stageController {
@@ -31,6 +31,16 @@ class stageController {
   }
   }
 
+  async getDocuments(req, res) {
+    try {
+      const stageDesc = await StageDesc.findOne({where: {stageId:req.params.id}});
+      const docs = await StageDescDocument.findAll({where: {stageDescId:stageDesc.id}});
+      return res.status(200).json(docs);
+  } catch (error) {
+      return res.status(500).send(error.message);
+  }
+  }
+
   async getOne(req, res) {
     try {
         const stage = await Stage.findOne({where: {id:req.params.id}})
@@ -38,7 +48,7 @@ class stageController {
     } catch (error) {
         return res.status(500).send(error.message)
     }
-}
+  }
 }
 
 module.exports = new stageController();

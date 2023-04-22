@@ -8,26 +8,43 @@ import archive from "../../../Icons/archive.png"
 import { List } from '../../../Componets/List/List';
 import { Link } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
+import { useHttp } from '../../../hooks/http.hook';
+import { useEffect, useState } from 'react';
 
 // исполнитель
 export const Dashboard = () => {
 
-    const projects = ['Заказ 1', 'Заказ 2'];
-
-    const projectItems = projects.map((prj) => {
-        return (<div className="d-flex flex-row justify-content-between">
-            {prj}
-            <div className="d-flex flex-row justify-content-end">
-                <button>
-                    <img className="w-75" src={archive} alt="archive"></img>
-                </button>
-                <button>
-                    <img className="w-50" src={arrow} alt="arrow"></img>
-                </button>
-
-            </div>
-        </div>);
-    });
+    
+    const [projectItems, setProjectItems] = useState([]);
+    
+    const {request} = useHttp();
+   
+    useEffect(() => {
+        request('http://localhost:5000/api/project', 
+        'GET')
+        .then((resp) => { 
+            
+            setProjectItems(resp.map((prj) => {
+                return (<div className="d-flex flex-row justify-content-between">
+                    {prj.name}
+                    <div className="d-flex flex-row justify-content-end">
+                        <button>
+                            <img className="w-75" src={archive} alt="archive"></img>
+                        </button>
+                        <Link to={`project/${prj.id}`}>
+                            <img className="w-50" src={arrow} alt="arrow"></img>
+                        </Link>
+        
+                    </div>
+                </div>);
+            }));
+            
+        })
+        .catch((e) => console.log(e.message));
+    }, []);
+    
+    
+    
 
     return (<div>
         <div className="mb-5 d-flex flex-row align-items-center">

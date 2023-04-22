@@ -1,5 +1,5 @@
 const ApiError = require('../error/ApiError')
-const {Project} = require('../models/models')
+const {Project, Stage} = require('../models/models')
 
 
 class projectController {
@@ -39,6 +39,15 @@ class projectController {
         return res.status(500).send(error.message)
     }
 }
+
+  async getStages(req, res) {
+      try {
+        const stages = await Stage.findAll({where: {projectId:req.params.id}})
+        return res.status(200).json(stages)
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+  }
 }
 
 module.exports = new projectController();
