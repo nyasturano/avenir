@@ -11,6 +11,7 @@ const Employer = sequelize.define('employer', {
 const Project = sequelize.define('project', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING},
+    currentStageId: {type: DataTypes.INTEGER, defaultValue: 0, allowNull: false},
   });
 
 const Employee = sequelize.define('employee', {

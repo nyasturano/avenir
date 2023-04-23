@@ -1,6 +1,21 @@
 body, html {
   margin: 0;
   font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+
+body {
+  overflow-y: scroll;
+
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 @font-face {

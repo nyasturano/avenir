@@ -1,0 +1,3 @@
+sudo -u postgres psql
+
+sudo editor /etc/postgresql/15/main/pg_hba.conf

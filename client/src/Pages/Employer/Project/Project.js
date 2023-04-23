@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useHttp } from '../../../hooks/http.hook';
 import { useSelector, useDispatch } from 'react-redux';
 import { appIdle, appFetching, appFetched, appFetchingError } from "../../../actions";
+import axios from 'axios';
 
 import './project.css'
 
@@ -10,9 +11,9 @@ import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import download from '../../../Icons/download.png'
 import AccordionBody from "react-bootstrap/esm/AccordionBody";
+import { Spinner } from "../../../Componets/Spinner/Spinner";
 
 export const Project = () => {
-
 
     const fillNumber = (number) => {
         if (number < 10)
@@ -25,6 +26,7 @@ export const Project = () => {
     const {request} = useHttp();
     const {id} = useParams();
 
+    const [project, setProject] = useState([]);
     const [stages, setStages] = useState([]);
     const [statuses, setStatuses] = useState([]);
     const [neededDocs, setneededDocs] = useState([]);
@@ -37,9 +39,19 @@ export const Project = () => {
         .then(resp => setStages(resp))
         .then(() => request(`http://localhost:5000/api/status`, 'GET'))
         .then(resp => setStatuses(resp))
+        .then(() => request(`http://localhost:5000/api/project/${id}`, 'GET'))
+        .then(resp => setProject(resp))
         .catch((e) => console.log(e.message));
         
     }, []);
+
+    const handleFileChange = (e) => {
+        if (e.target.files) {
+          setFile(e.target.files[0]);
+        }
+      };
+
+      const [file, setFile] = useState();
 
     useEffect(() => {
         if (!stages)
@@ -77,104 +89,118 @@ export const Project = () => {
     
     
     if (appStatus == 'fetching')
-        return;
-    
+        return <Spinner/>
+        
+        const stagesArray = stages.map((stage, index) => {
+            
+            let cmp = 0;
+
+            if (project.currentStageId > index)
+                cmp = 2;
+            if (project.currentStageId < index)
+                cmp = 0;
+            if (project.currentStageId == index)
+                cmp = 1;
+            
+
+            return (<Accordion.Item key={index} eventKey={index}>
+                <Accordion.Header>
+                    <div className="stage-title">
+                            <span className="me-4 number">{fillNumber(index + 1)}</span>
+                            {stage.name}
+                    </div>
+                    <div className="ms-4">{statuses[cmp].status}</div>
+                </Accordion.Header>
 
 
+                <AccordionBody>
 
-    const stagesArray = stages.map((stage, index) => {
-        return (<Accordion.Item key={index} eventKey={index}>
-            <Accordion.Header>
-                <div className="stage-title">
-                        <span className="me-4 number">{fillNumber(index + 1)}</span>
-                        {stage.name}
-                </div>
-                <div className="ms-4">{statuses[stage.statusId].status}</div>
-            </Accordion.Header>
+                    <div className="report-block">
+                        <div className="title">Необходимые документы</div>
+                        <div className="body">
+                            {neededDocs[index].map((doc, index) => {
+                                return <div key={index} className="document">
+                                    <a href={`http://localhost:5000/${doc.path}`}>
+                                        <img src={download}></img>
+                                    </a>
+                                    <span className="document-name ms-3">
+                                        {doc.description}
+                                    </span>
+                                </div>
+                            })}
+                        </div>
+                    </div>
 
+                    <hr></hr>
 
-            <AccordionBody>
+                    <div className="report-block ">
+                        <div className="title">
+                            Отчеты от исполнителя
+                        </div>
 
-                <div className="report-block">
-                    <div className="title">Необходимые документы</div>
-                    <div className="body">
-                        {neededDocs[index].map((doc, index) => {
-                            return <div key={index} className="document">
-                                <a href={`http://localhost:5000/${doc.path}`}>
+                        <div className="body">
+
+                            <div className="sent-report">
+                                <button>
                                     <img src={download}></img>
-                                </a>
+                                </button>
                                 <span className="document-name ms-3">
-                                    {doc.description}
+                                    Договор.pdf
                                 </span>
                             </div>
-                        })}
-                    </div>
-                </div>
-
-                <hr></hr>
-
-                <div className="report-block ">
-                    <div className="title">
-                        Отчеты от исполнителя
-                    </div>
-
-                    <div className="body">
-
-                        <div className="sent-report">
-                            <button>
-                                <img src={download}></img>
-                            </button>
-                            <span className="document-name ms-3">
-                                Договор.pdf
-                            </span>
+                            
                         </div>
-                        
                     </div>
-                </div>
 
-                <hr></hr>
+                    <hr></hr>
 
-                <div className="report-block ">
-                    <div className="title">
-                        Добавить документ
-                    </div>
-                    <div className="body">
-                        <Button className="btn-yellow me-4">Прикрепить файл</Button>
-                        <Button className="btn-yellow-inverse">Отправить</Button>
-                    </div>
-                </div>
-
-                <hr></hr>
-
-                <div className="report-block ">
-                    <div className="title">
-                        Загруженные документы
-                    </div>
-                    <div className="body">
-
-                        <div className="sent-report">
-                            <button>
-                                <img src={download}></img>
-                            </button>
-                            <span className="document-name ms-3">
-                                Договор.pdf
-                            </span>
+                    <div className="report-block ">
+                        <div className="title">
+                            Добавить документ
                         </div>
-
-
-                        
+                        <div className="body">
+                            <input onChange={handleFileChange} type="file"></input>
+                            {/* <Button className="btn-yellow me-4">Прикрепить файл</Button> */}
+                            <Button onClick={() => {
+                                let formData = new FormData();
+                                formData.append('file', file);
+                                axios.post('http://localhost:5000/api/report/create', formData)
+                                .then(resp => console.log(resp))
+                            }} className="btn-yellow-inverse">Отправить</Button>
+                        </div>
                     </div>
-                </div>
 
-                <hr></hr>
+                    <hr></hr>
 
-                <div className="d-flex flex-row justify-content-center">
-                    <Button className="btn-yellow mt-4 px-5">Завершить</Button>
-                </div>
+                    <div className="report-block ">
+                        <div className="title">
+                            Загруженные документы
+                        </div>
+                        <div className="body">
 
-            </AccordionBody>
+                            <div className="sent-report">
+                                <button>
+                                    <img src={download}></img>
+                                </button>
+                                <span className="document-name ms-3">
+                                    Договор.pdf
+                                </span>
+                            </div>
 
-        </Accordion.Item>);
+
+                            
+                        </div>
+                    </div>
+
+                    <hr></hr>
+
+                    <div className="d-flex flex-row justify-content-center">
+                        {cmp == 1  ? <Button className="btn-yellow mt-4 px-5">Завершить</Button> : ""}
+                    </div>
+
+                </AccordionBody>
+
+            </Accordion.Item>);
     });
 
     return <div>

@@ -9,7 +9,8 @@ import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import download from '../../../Icons/download.png'
 import AccordionBody from "react-bootstrap/esm/AccordionBody";
-
+import {Spinner} from '../../../Componets/Spinner/Spinner';
+import './project.css'
 
 export const Project = () => {
 
@@ -84,9 +85,8 @@ export const Project = () => {
     
     
     if (appStatus == 'fetching')
-    return;
-    
-    
+        return <Spinner/>;
+
 
     const stagesArray = stages.map((stage, index) => {
         return (<Accordion.Item key={index} eventKey={index}>
@@ -183,5 +183,4 @@ export const Project = () => {
         </Accordion.Item>);
     });
 
-    
 }

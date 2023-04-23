@@ -15,8 +15,9 @@ class documentController {
   async create(req, res, next) {
     try {
       const {file} = req.files
-      let fileName = uuid.v4() + ext(file);
-      img.mv(path.resolve(__dirname, '..', 'static', fileName))
+      console.log(file.name)
+      let fileName = uuid.v4() + "." + ext(file.name);
+      file.mv(path.resolve(__dirname, '..', 'static', fileName))
       
       const emp = await Document.create({description: file.name, path: fileName})
       return res.json({emp})

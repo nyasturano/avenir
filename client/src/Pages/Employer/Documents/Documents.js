@@ -3,13 +3,14 @@ import { Header } from "../../../Componets/Header/Header";
 import { List } from "../../../Componets/List/List"
 import download from "../../../Icons/download.png";
 import trash from "../../../Icons/trash.png";
-
+import axios from 'axios';
 
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { appIdle, appFetching, appFetched, appFetchingError } from "../../../actions";
 import { useHttp } from '../../../hooks/http.hook';
 import Button from "react-bootstrap/esm/Button";
+import { Spinner } from "../../../Componets/Spinner/Spinner";
 
 export const Documents = () => {
 
@@ -40,8 +41,11 @@ export const Documents = () => {
         if (!file)
             return;
 
-        request(`http://localhost:5000/api/document/create`, 'POST', file, {"Access-Control-Allow-Origin" : '*'})
-        .then(resp => console.log(resp));
+        
+        let formData = new FormData();
+        formData.append('file', file);
+        axios.post('http://localhost:5000/api/document/create', formData)
+        .then(resp => console.log(resp))
         
     }
    
@@ -63,15 +67,13 @@ export const Documents = () => {
 
 
     if (appStatus == 'fetching')
-    return (<div>
-        <Header title={"Основные документы"}></Header>
-            <Button className="mb-5 btn-yellow">Добавить документ</Button>
-    </div>);
+        return <Spinner/>
 
     return (<div>
-        <Header title={"Основные документы"}></Header>
-        <input onChange={handleFileChange} type="file"></input>
-        <Button onClick={uploadDocument} className="mb-5 btn-yellow">Добавить документ</Button>
+        <div className="ps-5 d-flex flex-column align-items-start mb-4">
+            <input onChange={handleFileChange} type="file"></input>
+            <Button onClick={uploadDocument} className="btn-yellow mt-4">Добавить документ</Button>
+        </div>
         <List items={docsItems}></List>
     </div>);
 }

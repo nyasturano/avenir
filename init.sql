@@ -14,10 +14,9 @@ insert into projects (name, "employeeId", "employerId") values('Проект 2',
 insert into projects (name, "employeeId", "employerId") values('Проект 3', 3,1);
 insert into projects (name, "employeeId", "employerId") values('Проект 4', 4,2);
 
-insert into statuses (status) values('Не начато');
-insert into statuses (status) values('В работе');
+insert into statuses (status) values('Ожидание');
+insert into statuses (status) values('В процессе');
 insert into statuses (status) values('Завершено');
-insert into statuses (status) values('Возникли трудности');
 
 
 insert into stages (name, "projectId", "statusId") values('Этап 1', 1,2);
