@@ -1,4 +1,3 @@
-
 import { Header } from "../../../Componets/Header/Header";
 import { List } from "../../../Componets/List/List"
 import download from "../../../Icons/download.png";
@@ -51,7 +50,9 @@ export const NewProject = () => {
 
     }
 
-    temp = [{name:'Шаблон туда сюда 1'},{name:'Шаблон туда сюда 2'},{name:'Шаблон туда сюда 3'},{name:'3'},{name:'3'},{name:'3'},{name:'3'},{name:'3'},{name:'3'},{name:'3'},{name:'3'},{name:'3'},{name:'3'},]
+
+    temp = [{name:'Строительно-монтажные работы'},{name:'Дополнительный шаблон'}]
+
     const tempItems = temp.map((doc,index) => {
         return (
             <option  value={index}>

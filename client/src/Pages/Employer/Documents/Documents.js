@@ -44,6 +44,7 @@ export const Documents = () => {
         
         let formData = new FormData();
         formData.append('file', file);
+
         axios.post('http://localhost:5000/api/document/create', formData)
         .then(resp => console.log(resp))
         

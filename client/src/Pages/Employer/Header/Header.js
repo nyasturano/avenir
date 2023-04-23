@@ -9,48 +9,58 @@ import projects from "../../../Icons/projects.png"
 import arrow from "../../../Icons/arrow.png"
 import archive from "../../../Icons/archive.png"
 
-import { Link, Route } from 'react-router-dom';
 
+import { NavLink, Link, Route } from 'react-router-dom';
+
+
+import './header.css'
 
 export const Header = () => {
     return <div className="mb-5 d-flex flex-row align-items-center">
         <Nav className="p-4 d-flex align-items-center w-100">
             <Nav.Item className="d-flex flex-row">
                 <span className="d-flex flex-column justify-content-center">
-                    <img src={profile} alt="ptofile"></img>
+                    <img src={profile} alt="profile"></img>
                 </span>
-                <Link to="profile">
-                    Профиль
-                </Link>
+                <NavLink activeclassname="active" to="profile">
+                    <div className="d-flex align-items-center">
+                        Профиль
+                    </div>
+                </NavLink>
             </Nav.Item>
 
             <Nav.Item className="d-flex flex-row">
                 <span className="d-flex flex-column justify-content-center">
                     <img src={projects} alt="ptofile"></img>
                 </span>
-                <Link to="projects">
+                <NavLink activeclassname="active" to="projects">
                     Проекты
-                </Link>
+                </NavLink>
             </Nav.Item>
 
             <Nav.Item className="d-flex flex-row">
                 <span className="d-flex flex-column justify-content-center">
                     <img src={template} alt="ptofile"></img>
                 </span>
-                <Link to="templates">
+                <NavLink activeclassname="active" to="templates">
                     Шаблоны
-                </Link>
+                </NavLink>
             </Nav.Item>
 
             <Nav.Item className="d-flex flex-row">
                 <span className="d-flex flex-column justify-content-center">
                     <img src={docs} alt="docs"></img>
                 </span>
-                <Link to="documents">
+                <NavLink activeclassname="active" to="documents">
                     Основные документы
-                </Link>
+                </NavLink>
             </Nav.Item>
         </Nav>
-        <Link to="newProject" className="btn-yellow w-25 p-3 ms-4">Создать заказ</Link>
+            <Button className="btn-yellow w-25 p-3 ms-4">
+                <Link to="new" style={{"color":"#000"}}>
+                    Создать заказ
+                </Link>
+            </Button>
+
     </div>
 }

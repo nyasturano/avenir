@@ -124,7 +124,9 @@ export const Project = () => {
                                         <img src={download}></img>
                                     </a>
                                     <span className="document-name ms-3">
-                                        {doc.description}
+                                        <a href={`http://localhost:5000/${doc.path}`}>
+                                            {doc.description}
+                                        </a>
                                     </span>
                                 </div>
                             })}
@@ -140,12 +142,20 @@ export const Project = () => {
 
                         <div className="body">
 
-                            <div className="sent-report">
+                            <div className="document">
                                 <button>
                                     <img src={download}></img>
                                 </button>
                                 <span className="document-name ms-3">
-                                    Договор.pdf
+                                    ГК №3-20-ОБ.doc
+                                </span>
+                            </div>
+                            <div className="document">
+                                <button>
+                                    <img src={download}></img>
+                                </button>
+                                <span className="document-name ms-3">
+                                    Прил. №1 к контракту Техническое задание.pdf
                                 </span>
                             </div>
                             
@@ -183,7 +193,7 @@ export const Project = () => {
                                     <img src={download}></img>
                                 </button>
                                 <span className="document-name ms-3">
-                                    Договор.pdf
+                                    ГК №3-20-ОБ.doc
                                 </span>
                             </div>
 

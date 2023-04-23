@@ -16,7 +16,7 @@ export const useHttp = () => {
         throw new Error(`Could not fetch ${url}, status: ${response.status}`);
       }
       const data = await response.json();
-      setTimeout(() => dispatch(appFetched()), 100);
+      setTimeout(() => dispatch(appFetched()), 200);
       return data;
     
     } catch(e) {

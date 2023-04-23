@@ -47,6 +47,17 @@ export const Projects = () => {
     
     return (<div>
         <List title={'Текущие заказы'} items={projectItems}></List>
-        <List title={'Выполненные заказы'} items={projectItems}></List>       
+        <List title={'Выполненные заказы'} items={[<div className="d-flex flex-row justify-content-between">
+                    Установка пешеходного ограждения
+                    <div className="d-flex flex-row justify-content-end">
+                        <button>
+                            <img className="w-75" src={archive} alt="archive"></img>
+                        </button>
+                        <Link>
+                            <img className="w-50" src={arrow} alt="arrow"></img>
+                        </Link>
+        
+                    </div>
+                </div>]}></List>       
     </div>);
 }
