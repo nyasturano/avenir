@@ -1,5 +1,6 @@
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
+import NewProject from 'react-bootstrap/Button';
 
 import profile from "../../../Icons/profile.png"
 import docs from "../../../Icons/docs.png"
@@ -8,7 +9,7 @@ import projects from "../../../Icons/projects.png"
 import arrow from "../../../Icons/arrow.png"
 import archive from "../../../Icons/archive.png"
 
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 
 
 export const Header = () => {
@@ -50,6 +51,6 @@ export const Header = () => {
                 </Link>
             </Nav.Item>
         </Nav>
-        <Button className="btn-yellow w-25 p-3 ms-4">Создать заказ</Button>
+        <Link to="newProject" className="btn-yellow w-25 p-3 ms-4">Создать заказ</Link>
     </div>
 }
