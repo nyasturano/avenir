@@ -25,6 +25,7 @@ export const Employer = () => {
         <div>
             <Routes>
                 <Route path="profile"></Route>
+                <Route path="new" element={<NewProject/>}></Route>
                 <Route path="projects" element={<Projects/>}></Route>
                 <Route path="projects/:id" element={<Project/>}></Route>
                 <Route path="projects/archive/:id" element={<Archive/>}></Route>

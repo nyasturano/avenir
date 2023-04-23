@@ -2,6 +2,22 @@
     color: #FFE600;
 }
 
+.document {
+    margin: 20px;
+}
+
+.document a {
+    color: black;
+    text-decoration: none;
+}
+
+.document a:hover {
+    color: rgb(72, 72, 72);
+    text-decoration: underline;
+}
+
+
+
 .stage-title {
     margin: 20px;
     font-size: 22px;
