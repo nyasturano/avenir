@@ -1,16 +1,25 @@
 const ApiError = require('../error/ApiError')
-const bcrypt = require('bcrypt')
 const {Document} = require('../models/models')
+const uuid = require('uuid')
+const path = require('path')
 
+function ext(name) {
+  var m = name.match(/\.([^.]+)$/)
+  return m && m[1]
+}
 
 class documentController {
 
+  
+
   async create(req, res, next) {
     try {
-      const {description, path} = req.body
+      const {file} = req.files
+      let fileName = uuid.v4() + ext(file);
+      img.mv(path.resolve(__dirname, '..', 'static', fileName))
       
-      const emp = await Document.create({description, path})
-      return res.json({token:emp.id })
+      const emp = await Document.create({description: file.name, path: fileName})
+      return res.json({emp})
     } catch (error){
       return res.send(error.message)
     }

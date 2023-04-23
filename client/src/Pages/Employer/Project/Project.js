@@ -4,12 +4,12 @@ import { useHttp } from '../../../hooks/http.hook';
 import { useSelector, useDispatch } from 'react-redux';
 import { appIdle, appFetching, appFetched, appFetchingError } from "../../../actions";
 
+import './project.css'
 
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import download from '../../../Icons/download.png'
 import AccordionBody from "react-bootstrap/esm/AccordionBody";
-
 
 export const Project = () => {
 
@@ -18,13 +18,6 @@ export const Project = () => {
         if (number < 10)
             number = "0" + number;
         return number;
-    }
-
-    const downloadDocument = (path) => {
-        console.log(path)
-        request(`http://localhost:5000/${path}`, 'GET', null, {"Content-Type": "application/pdf"})
-        
-        .catch((e) => console.log(e.message));
     }
 
     const {appStatus} = useSelector(state => state);
@@ -84,9 +77,10 @@ export const Project = () => {
     
     
     if (appStatus == 'fetching')
-    return;
+        return;
     
-    
+
+
 
     const stagesArray = stages.map((stage, index) => {
         return (<Accordion.Item key={index} eventKey={index}>
@@ -182,6 +176,12 @@ export const Project = () => {
 
         </Accordion.Item>);
     });
+
+    return <div>
+        <Accordion>
+            {stagesArray}
+        </Accordion>
+    </div>
 
     
 }
