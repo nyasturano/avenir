@@ -77,6 +77,7 @@ const Report = sequelize.define('report', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     description: {type: DataTypes.STRING},
     path: {type: DataTypes.STRING},
+    isEmployer: {type: DataTypes.BOOLEAN}
   });
 
 Stage.belongsToMany(Report, {through: StageReport})

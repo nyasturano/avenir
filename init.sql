@@ -38,9 +38,9 @@ update stages set "stageDescId" = 3 where id = 3;
 update stages set "stageDescId" = 4 where id = 4;
 update stages set "stageDescId" = 5 where id = 5;
 
-insert into reports (description, path) values('Отчёт 1', '10. журнал общих работ\ОЖР.pdf');
-insert into reports (description, path) values('Отчёт 2', '10. журнал общих работ\ОЖР.pdf');
-insert into reports (description, path) values('Отчёт 3', '7. паспорта и сертификаты\2. Сертификаты  стойки ДЗ и опоры СКЗМК освещения.pdf');
+insert into reports (description, path, "isEmployer") values('Отчёт 1', '10. журнал общих работ\ОЖР.pdf',true);
+insert into reports (description, path, "isEmployer") values('Отчёт 2', '10. журнал общих работ\ОЖР.pdf',false);
+insert into reports (description, path, "isEmployer") values('Отчёт 3', '7. паспорта и сертификаты\2. Сертификаты  стойки ДЗ и опоры СКЗМК освещения.pdf',true);
 
 insert into stage_reports ("stageId", "reportId") values(1, 1);
 insert into stage_reports ("stageId", "reportId") values(1, 2);
