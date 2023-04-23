@@ -50,7 +50,9 @@ export const NewProject = () => {
 
     }
 
+
     temp = [{name:'Строительно-монтажные работы'},{name:'Дополнительный шаблон'}]
+
     const tempItems = temp.map((doc,index) => {
         return (
             <option  value={index}>
